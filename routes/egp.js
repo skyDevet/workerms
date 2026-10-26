@@ -37,8 +37,8 @@ export async function getTender({ env, id, query }) {
   setRuntimeEnv(env); await loadSessionFromKV(env);
   const source = String(query.get('source') || '').toLowerCase();
   const p = source === 'purchasing'
-    ? 
-    : ;
+    ? `/po-gw/federal/purchasing/api/quotation-invitations/get-quotation-invitation/${id}`
+    : `/po-gw/cms-v2/api/sourcing/get-lot/${id}`;
   const { status: s, body } = await egpGet(p);
   return json(body, s, env);
 }
@@ -151,6 +151,6 @@ export async function postAddItems({ env }) {
 export async function postSubmit({ env, id }) {
   setRuntimeEnv(env); await loadSessionFromKV(env);
   const { status: s, body } = await egpRequest('POST',
-    , {});
+    `/po-gw/federal/purchasing/api/quotation-request-responses/submit-quotation-request-response/${id}`, {});
   return json(body, s, env);
 }

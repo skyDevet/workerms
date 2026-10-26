@@ -93,7 +93,7 @@ async function robustFetch(url, init = {}) {
       clearTimeout(timer);
       lastErr = e;
       const code = e?.cause?.code || e?.name || e?.message || 'error';
-      console.warn();
+      console.warn(`[egp] fetch attempt ${attempt + 1}/${CONFIG.MAX_RETRIES} failed: ${code}`);
       if (attempt < CONFIG.MAX_RETRIES - 1) {
         await new Promise(r => setTimeout(r, CONFIG.RETRY_DELAY_MS));
       }
@@ -178,7 +178,7 @@ function buildHmac(method, fullUrl) {
   const q  = u.search.startsWith('?') ? u.search.slice(1) : u.search;
   const q_ = q ? '?' + q : '';
   const ts = String(Math.floor(Date.now() / 1000));
-  const nonce = ;
+  const nonce = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
   const canonical = [m, p, q_, ts, nonce].join('\n');
   const sig = crypto.createHmac('sha256', CONFIG.HMAC_SECRET).update(canonical).digest('base64');
   return {
@@ -191,7 +191,7 @@ function buildHmac(method, fullUrl) {
 function baseHeaders() {
   const CONFIG = config();
   return {
-    Authorization: ,
+    Authorization: `Bearer ${session.access_token}`,
     Accept: 'application/json, text/plain, */*',
     'X-Application-Key': 'landing',
     'X-Visitor-Id': CONFIG.VISITOR_ID,
@@ -249,7 +249,7 @@ export async function egpRequest(method, pathname, body) {
     return { status: r.status, body: parsed };
   } catch (e) {
     const msg = errMessage(e);
-    console.warn(, msg);
+    console.warn(`[egp] egpRequest ${m} ${pathname} failed:`, msg);
     return { status: 0, body: { error: 'eGP unreachable: ' + msg } };
   }
 }
