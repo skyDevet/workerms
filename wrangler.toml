@@ -1,0 +1,20 @@
+name = "mesay-api"
+main = "index.js"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+CORS_ORIGIN = "http://localhost:5173"
+
+# Set secrets with:
+#   wrangler secret put SUPABASE_URL
+#   wrangler secret put SUPABASE_SERVICE_ROLE_KEY
+#   wrangler secret put EGP_USERNAME       (optional)
+#   wrangler secret put EGP_PASSWORD       (optional)
+#   wrangler secret put EGP_VISITOR_ID     (optional)
+#   wrangler secret put SUPABASE_STORAGE_BUCKET (optional, default "uploads")
+
+[[kv_namespaces]]
+binding = "EGP_SESSION"
+id = "REPLACE_WITH_KV_ID"
+# create with: wrangler kv:namespace create EGP_SESSION
