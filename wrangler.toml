@@ -13,3 +13,7 @@ CORS_ORIGIN = "http://localhost:5173"
 #   wrangler secret put EGP_PASSWORD       (optional)
 #   wrangler secret put EGP_VISITOR_ID     (optional)
 #   wrangler secret put SUPABASE_STORAGE_BUCKET (optional, default "uploads")
+
+[[kv_namespaces]]
+binding = "EGP_SESSION"
+id = "c3e67701531049a2a6547bab7a95a0c1"
