@@ -4,15 +4,11 @@ compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
 
 [vars]
-CORS_ORIGIN = "http://localhost:5173"
-
-# Set secrets with:
-#   wrangler secret put SUPABASE_URL
-#   wrangler secret put SUPABASE_SERVICE_ROLE_KEY
-#   wrangler secret put EGP_USERNAME       (optional)
-#   wrangler secret put EGP_PASSWORD       (optional)
-#   wrangler secret put EGP_VISITOR_ID     (optional)
-#   wrangler secret put SUPABASE_STORAGE_BUCKET (optional, default "uploads")
+CORS_ORIGIN = "http://localhost:5173,https://skydev.github.io,https://sky.net.et"
+SUPABASE_URL = "https://etfukwgwxcqhcpnixmjq.supabase.co"
+EGP_VISITOR_ID = "ce01e0a13c0cf55d99d8710d8b941c85"
+EGP_USERNAME = "mesaya496@gmail.com"
+SUPABASE_STORAGE_BUCKET = "uploads"
 
 [[kv_namespaces]]
 binding = "EGP_SESSION"
